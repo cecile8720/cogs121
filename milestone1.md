@@ -47,6 +47,7 @@ There would be a weather forecast and a map of the best locations to go fishing.
 Storyboard 1: Our app will help users discover and select appropriate hiking trails for them to use, ensuring they wont get lost.
 
 ![Storyboard 2](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/Storyboard%202.jpg)
+Storyboard 2: Our app will help users learn more about the wildlife around them, for both safety and curiosity purposes.
 
 ## Paper Prototypes
 **Paper Prototype 1**
@@ -70,5 +71,6 @@ A5: Pictures taken at the given location (maybe use Instagram API to find public
 
 **Paper Prototype 2**
 ![b0](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/b0.jpg)
+B0: Camera function
 ![b1](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/b1.jpg)
-
+B1: The returned result of the picture taken
