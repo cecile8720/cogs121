@@ -44,17 +44,29 @@ There would be a weather forecast and a map of the best locations to go fishing.
 
 ## Storyboards 
 ![Storyboard 1](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/Storyboard%201.jpg)
+Storyboard 1: Our app will help users discover and select appropriate hiking trails for them to use, ensuring they wont get lost.
 
 ![Storyboard 2](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/Storyboard%202.jpg)
 
 ## Paper Prototypes
 **Paper Prototype 1**
 ![a1](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a0.jpg)
+A0: Login Page
+
 ![a2](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a1.jpg)
+A1: Home Screen
+
 ![a3](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a2.jpg)
+A2: The users personal trip page
+
 ![a4](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a3.jpg)
+A3: All trails in the given area
+
 ![a5](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a4.jpg)
+A4: More details on specific trail (photos/reviews) and option to add to their trip
+
 ![a6](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a5.jpg)
+A5: Pictures taken at the given location (maybe use Instagram API to find public posts tagged with location)
 
 **Paper Prototype 2**
 ![b0](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/b0.jpg)
