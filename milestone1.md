@@ -43,6 +43,20 @@ APIs:
 There would be a weather forecast and a map of the best locations to go fishing. There would also be reports of the best days and times to go based on the fish pattern. Finally, we could also implement a log of sorts to track the fish captured and information about it. 
 
 ## Storyboards 
+![Storyboard 1](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/Storyboard%201.jpg)
 
+![Storyboard 2](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/Storyboard%202.jpg)
 
 ## Paper Prototypes
+**Paper Prototype 1**
+![a1](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a0.jpg)
+![a2](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a1.jpg)
+![a3](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a2.jpg)
+![a4](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a3.jpg)
+![a5](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a4.jpg)
+![a6](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/a5.jpg)
+
+**Paper Prototype 2**
+![b0](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/b0.jpg)
+![b1](https://github.com/cecile8720/cogs121/blob/master/Milestone%201%20Photos/b1.jpg)
+
