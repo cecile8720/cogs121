@@ -3,44 +3,47 @@
 
 <head>
   <title>Trails</title>
+  <link rel="stylesheet" type="text/css" href="css/trail-list.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 
 <body>
 		<div class="header">
-				<button>Hamburger</button>
-				<h3>Current Location</h3>
-				<button>Location</button>
-				<button><a href="nature-finder.html">Nature Finder</a></button>
+				<img id="hamburger" class="icon header" src="img/hamburger-menu.png">
+				<h2 class="current-location">Current Location</h2>
+				<img class="icon" src="img/location-icon.png">
+				<a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a>
 			</div>
-			<div class="tabs">
-				<button><a href="index.html">My Trips</a></button>
-				<button><a href="map.html">Map</a></button>
-				<button><a href="trail-list.html">Trails</a></button>
-				<button><a href="photos.html">Photos</a></button>
-			</div>	
+			<div class="menu">
+				<a href="index.html" class="button disabled">My Trips</a>
+				<a href="map.html" class="button">Map</a>
+				<a href="trail-list.html" class="button">Trails</a>
+				<a href="photos.html" class="button">Photos</a>
+			</div>
+			<hr>
 	<div data-role="page">
 
 		<div class="contents">
-			<p>Trail 1</p>
-			<div class="trail map">
+			<p class="title">Trail 1</p>
+			<div class="trail-map">
 				<img src="img/trail-1-placeholder.jpg" git>
 			</div>
 			<div class="reviews">
-				<button><a href="trail-1-review.html">Reviews</a></button>
+				<button class="tab disabled"><a href="trail-1-review.html">Reviews</a></button>
 			</div>
 			<div class="add">
-				<button><a>Add to Trip</a></button>
+				<button class="tab"><a>Add to Trip</a></button>
 			</div>
-			<p>Trail 2</p>
-			<div class="trail map">
+			<hr>
+			<p class="title">Trail 2</p>
+			<div class="trail-map">
 				<img src="img/trail-1-placeholder.jpg" git>
 			</div>
 			<div class="reviews">
-				<button><a href="trail-1-review.html">Reviews</a></button>
+				<button class="tab"><a href="trail-1-review.html">Reviews</a></button>
 			</div>
 			<div class="add">
-				<button><a>Add to Trip</a></button>
+				<button class="tab"><a>Add to Trip</a></button>
 			</div>
 		</div>
 
