@@ -3,10 +3,52 @@
 
 <head>
   <title>My Trips</title>
-  <link rel="stylesheet" type="text/css" href="css/index.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+
+  <!-- Firebase initialization pls dont touch -->
+  <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBU1zQlcACqaOhTPhsPNyQkh1RYFf2cdYU",
+      authDomain: "collegeburnouts.firebaseapp.com",
+      databaseURL: "https://collegeburnouts.firebaseio.com",
+      projectId: "collegeburnouts",
+      storageBucket: "collegeburnouts.appspot.com",
+      messagingSenderId: "890814837618"
+    };
+    firebase.initializeApp(config);
   </script>
+
+
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script type="text/javascript">
+  // jQuery convention for running when the document has been fully loaded:
+  $(document).ready(() => {
+    const database = firebase.database();
+    console.log("reached");
+    database.ref('location/Yellowstone').set({description: 'Wyoming, 3,471 mi^2', hours: '7AM-11PM', contact: '(307) 344-7381'});
+    database.ref('location/Zion').set({description: 'Utah, 229 mi^2', hours: '6AM-11PM', contact: '(435) 772-3256'});
+
+    $('#Zion').click(() => {
+      const key = 'location/' + $('#Zion').text();
+      database.ref(key).once('value', (snapshot) => {
+        const data = snapshot.val();
+        console.log('data retrieved', data);
+        $('#current-trip-name').html($('#Zion').text());
+        $('#des').html(data.description);
+        $('#hours').html(data.hours);
+        $('#contact').html(data.contact);
+
+      })
+    });
+
+  });
+  </script>
+
+
 </head>
 
 <body>
@@ -17,7 +59,7 @@
 			<img class="icon" src="img/location-icon.png">
 			<a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a>
 		</div>
-		
+
 		<div class="menu">
 			<a href="" class="disabled">My Trips</a>
 			<a href="map.html" class="button">Map</a>
@@ -31,16 +73,16 @@
 	<div class="content">
 		<div class="current-trip"> <!-- Current Trip -->
 			<h2>Current Trip: <span id="current-trip-name">Yellowstone</span><h2>
-				
+
 			<div> <!-- Location overview -->
 				<h4>Location overview: <h4>
 				<ul class="loc-info">
 					<li>Description: </li>
-						<ul ><li>loren ipsum</li></ul>
+						<ul ><li id="des">loren ipsum</li></ul>
 					<li>Hours of Operation: </li>
-						<ul><li>loren ipsum</li></ul>
+						<ul><li id="hours">loren ipsum</li></ul>
 					<li>Contact Information: </li>
-						<ul><li>loren ipsum</li></ul>
+						<ul><li id="contact">loren ipsum</li></ul>
 				</ul>
 			</div>
 
@@ -62,9 +104,19 @@
 		<div> <!-- Other Trips -->
 			<h2>Other Trips: </h2>
 			<div>
-				<a href"yosemite.html" class="othertrip">Yosemite</a>
+        <button id="Zion">Zion</button>
+
+        <!-- I needed to make buttons we can fix the shape
+        <a href"yosemite.html" class="othertrip">Yosemite</a>
 				<a href"zion.html" class="othertrip">Zion</a>
 				<a href"sequoia.html" class="othertrip">Sequoia</a>
+        -->
+
+        <!-- new trip input -->
+        <br/> <br/> <h2> Add New Trip </h2>
+        Location: <input id="locationBox" type="text" size="20"/>
+        <button id="addLocation">Add to Trips</button>
+
 			</div>
 		</div>
 
