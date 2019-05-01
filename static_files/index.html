@@ -45,6 +45,19 @@
       })
     });
 
+    $('#Yellowstone').click(() => {
+      const key = 'location/' + $('#Yellowstone').text();
+      database.ref(key).once('value', (snapshot) => {
+        const data = snapshot.val();
+        console.log('data retrieved', data);
+        $('#current-trip-name').html($('#Yellowstone').text());
+        $('#des').html(data.description);
+        $('#hours').html(data.hours);
+        $('#contact').html(data.contact);
+
+      })
+    });
+
   });
   </script>
 
@@ -52,6 +65,7 @@
 </head>
 
 <body>
+  <a name="top"></a>
 	<div>
 		<div class="header">
 			<img id="hamburger" class="icon header" src="img/hamburger-menu.png">
@@ -78,20 +92,22 @@
 				<h4>Location overview: <h4>
 				<ul class="loc-info">
 					<li>Description: </li>
-						<ul ><li id="des">loren ipsum</li></ul>
+						<ul ><li id="des">Wyoming, 3,471 mi^2</li></ul>
 					<li>Hours of Operation: </li>
-						<ul><li id="hours">loren ipsum</li></ul>
+						<ul><li id="hours">7AM-11PM</li></ul>
 					<li>Contact Information: </li>
-						<ul><li id="contact">loren ipsum</li></ul>
+						<ul><li id="contact">(307) 344-7381</li></ul>
 				</ul>
 			</div>
 
 			<div> <!-- Trails Saved -->
 				<h4>Trails Saved: </h4>
+        <!-- <a href="trail1.html"><div class="saved-trail"> -->
 				<a href="saved-trail.html"><div class="saved-trail">
 					<img src="https://placekitten.com/330/150">
 					<div>Saved Trail #1</div>
 				</div></a>
+        <!-- <a href="trail2.html"<div class="saved-trail"> -->
 				<a href="saved-trail.html"><div class="saved-trail">
 					<img src="https://placekitten.com/330/150">
 					<div>Saved Trail #2</div>
@@ -104,7 +120,8 @@
 		<div> <!-- Other Trips -->
 			<h2>Other Trips: </h2>
 			<div>
-        <button id="Zion">Zion</button>
+        <a href="#top"><button class="tripButtons" id="Zion">Zion</button></a>
+        <a href="#top"><button class="tripButtons" id="Yellowstone">Yellowstone</button></a>
 
         <!-- I needed to make buttons we can fix the shape
         <a href"yosemite.html" class="othertrip">Yosemite</a>
