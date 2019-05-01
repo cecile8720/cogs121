@@ -10,21 +10,28 @@
 </head>
 
 <body>
+	<div>
 		<div class="header">
 			<img id="hamburger" class="icon header" src="img/hamburger-menu.png">
 			<h2 class="current-location">Current Location</h2>
 			<img class="icon" src="img/location-icon.png">
 			<a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a>
 		</div>
+		
 		<div class="menu">
-			<a href="index.html" class="button disabled">My Trips</a>
+			<a href="index.html" class="disabled">My Trips</a>
 			<a href="map.html" class="button">Map</a>
 			<a href="trail-list.html" class="button">Trails</a>
 			<a href="photos.html" class="button">Photos</a>
 		</div>
-		<hr>
-		<div class="content">
+	</div>
+
+	<hr>
+
+	<div class="content">
+		<div> <!-- Current Trip -->
 			<h2>Current Trip: <span id="current-trip">Yellowstone</span><h2>
+				
 			<div> <!-- Location overview -->
 				<h4>Location overview: <h4>
 				<ul class="loc-info">
@@ -36,13 +43,32 @@
 						<ul><li>loren ipsum</li></ul>
 				</ul>
 			</div>
+
 			<div> <!-- Trails Saved -->
 				<h4>Trails Saved: </h4>
 				<div class="saved-trail">
-					
+					<img src="https://placekitten.com/330/150">
+					<div>Saved Trail #1</div>
+				</div>
+				<div class="saved-trail">
+					<img src="https://placekitten.com/330/150">
+					<div>Saved Trail #2</div>
 				</div>
 			</div>
 		</div>
+
+	<hr>
+
+		<div> <!-- Other Trips -->
+			<h2>Other Trips: </h2>
+			<div>
+				<a href"" class="othertrip">Yosemite</a>
+				<a href"" class="othertrip">Zion</a>
+				<a href"" class="othertrip">Sequoia</a>
+			</div>
+		</div>
+
+	</div>
 </body>
 
 </html>
