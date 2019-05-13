@@ -20,18 +20,49 @@
   </script>
 
 
-  <link rel="stylesheet" type="text/css" href="css/index.css">
+
+
+  <link rel="stylesheet" type="text/css" href="css/index.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script type="text/javascript">
   // jQuery convention for running when the document has been fully loaded:
   $(document).ready(() => {
+
+    // NPS data retrieval
+    $('#Zion').click(() => {
+      console.log("clicked");
+      $.ajax({
+        //url: 'https://developer.nps.gov/api/v1/parks?stateCode=CA&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
+        url: 'https://developer.nps.gov/api/v1/alerts?q=Zion&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          //console.log('aja actually worked');
+          console.log('you actually received some data', data);
+          //console.table(data.data);
+          console.log(data.data[0].title);
+          $('#des').html(data.data[0].title);
+          /*for (const e of Object.keys(data)) {
+            console.log(e, '->', data.data[e]);
+          }*/
+
+          Object.keys(data.data).forEach((e) => {
+            console.log('Title: ->', data.data[e].title);
+          });
+        }
+      });
+    });
+
+
+
     const database = firebase.database();
     console.log("reached");
     database.ref('location/Yellowstone').set({description: 'Wyoming, 3,471 mi^2', hours: '7AM-11PM', contact: '(307) 344-7381'});
     database.ref('location/Zion').set({description: 'Utah, 229 mi^2', hours: '6AM-11PM', contact: '(435) 772-3256'});
 
+    /*
     $('#Zion').click(() => {
       const key = 'location/' + $('#Zion').text();
       database.ref(key).once('value', (snapshot) => {
@@ -43,7 +74,7 @@
         $('#contact').html(data.contact);
 
       })
-    });
+    });*/
 
     $('#Yellowstone').click(() => {
       const key = 'location/' + $('#Yellowstone').text();
