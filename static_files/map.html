@@ -48,10 +48,21 @@
 		});
 	</script> -->
 
+  <script type="text/javascript">
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position.coords);
+      });
+    } else {
+      console.error("Geolocation is not supported by this browser!");
+    }
+  </script>
+
   <!-- Google Map -->
   <script>
     function myMap() {
       var mapProp= {
+        //center:new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
         center:new google.maps.LatLng(37.865101, -119.538330),
         zoom:10,
         mapTypeId: google.maps.MapTypeId.HYBRID
