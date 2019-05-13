@@ -33,7 +33,7 @@ img.icon {
 	vertical-align: center;
 }
 
-h2.current-location {
+#current-location {
 	display: inline-block;
 	font-size: 30px;
 }
