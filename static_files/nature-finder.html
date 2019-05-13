@@ -27,22 +27,42 @@
 
 	<hr>
 
+	
+	<script src="https://api.everypixel.com/v1/keywords"></script>
+	<script>
+		//initialize everypixel
+		var config = {
+			client_id = '<OWW16mQtRuHeIKf6X0SSDatK>',
+			client_secret = '<d7AMBj94Jj3VZSWNpuIgd6vsr4lDqqSwwoTSLPYVNrxmuVWN>',
+			params = {'url': 'http://image.everypixel.com/2014.12/67439828186edc79b9be81a4dedea8b03c09a12825b_b.jpg', 'num_keywords': 10}
+		}
+	</script>
 	<!--jQuery convention for running when the document has been fully loaded-->
 	<script type="text/javascript">
 		$(document).ready(() => {
-			
+			const imgURL = ''
+
 			$('#insertImage').click(() => {
-				console.log('Accepting image');
-				var imgURL = document.querySelector().src;
-				$('#theirImage').html(imgURL)
+
+				$.ajax({
+					url:'https://api.everypixel.com/v1/keywords',
+					type: 'GET',
+					dataType: 'json',
+					success: (data) => {
+					console.log('Accepting image'),
+					imgURL = document.querySelector('').src,
+					$('#theirImage').html(imgURL)
+					}
+				});
 			})
 
-			
+
 		});
 		</script>
 
+
 	<div class="Image_Bin">
-		<img class="theirImage" src="blank.png" alt>
+		<img class="theirImage" src="img/blank.png" alt>
 	</div>
 	<div class="insertImage">
 		<input type="file" accept="image/*">
