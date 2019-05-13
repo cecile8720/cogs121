@@ -4,19 +4,55 @@
 <head>
   <title>Nature Finder</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 
 <body>
-		<p>
-      <a onclick="history.back()">Back</a> </br>
-			<a href="index.html">My Trips</a>
-			</br>
-			<a href="map.html">Map</a>
-			</br>
-			<a href="trail-list.html">Trails</a>
-			</br>
-			<a href="photos.html">Photos</a>
-		<p>
+	<a name="top"></a>
+	<div>
+		<div class="header">
+			<img id="hamburger" class="icon header" src="img/hamburger-menu.png">
+			<h2 class="current-location">Current Location</h2>
+			<img class="icon" src="img/location-icon.png">
+			<a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a>
+		</div>
+
+		<div class="menu">
+			<a href="" class="disabled">My Trips</a>
+			<a href="map.html" class="button">Map</a>
+			<a href="trail-list.html" class="button">Trails</a>
+			<a href="photos.html" class="button">Photos</a>
+		</div>
+	</div>
+
+	<hr>
+
+	<!--jQuery convention for running when the document has been fully loaded-->
+	<script type="text/javascript">
+		$(document).ready(() => {
+			
+			$('#insertImage').click(() => {
+				console.log('Accepting image');
+				var imgURL = document.querySelector().src;
+				$('#theirImage').html(imgURL)
+			})
+
+			
+		});
+		</script>
+
+	<div class="Image_Bin">
+		<img class="theirImage" src="blank.png" alt>
+	</div>
+	<div class="insertImage">
+		<input type="file" accept="image/*">
+	</div>
+	<div class="keyWords"></div>
+
+	<br>
+	
+	
+
 </body>
 
 </html>
