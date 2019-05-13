@@ -5,6 +5,11 @@
 	margin-bottom: 10px;
 	position: relative;
 }
+
+#states {
+
+}
+
 .tripButtons {
 		background-color: green;
 		border: 1px solid black;
@@ -86,7 +91,23 @@ hr {
 }
 
 .loc-info {
+	font-size: 25px;
+	text-decoration: underline;
+}
+
+.p_text {
 	font-size: 20px;
+}
+
+#locationBox {
+	width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+#addLocation {
+	height: 40px;
 }
 
 .saved-trail {

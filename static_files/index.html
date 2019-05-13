@@ -30,27 +30,51 @@
   // jQuery convention for running when the document has been fully loaded:
   $(document).ready(() => {
 
-    // NPS data retrieval
+    // NPS data retrieval for Yellowstone
+    $.ajax({
+      url: 'https://developer.nps.gov/api/v1/parks?q=Yellowstone&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        console.log('you actually received some data', data);
+        console.table(data.data);
+        // display data on page
+        $('#current-trip-name').html(data.data[1].fullName);
+        $('#states').html(data.data[1].states);
+        $('#des').html(data.data[1].description);
+        $('#weather').html(data.data[1].weatherInfo);
+        //console.log(data.data[0].url);
+
+        /*for (const e of Object.keys(data)) {
+          console.log(e, '->', data.data[e]);
+        }*/
+        /*
+        Object.keys(data.data).forEach((e) => {
+          console.log('Title: ->', data.data[e].title);
+        });*/
+      }
+    });
+
     $('#Zion').click(() => {
       console.log("clicked");
       $.ajax({
-        //url: 'https://developer.nps.gov/api/v1/parks?stateCode=CA&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
-        url: 'https://developer.nps.gov/api/v1/alerts?q=Zion&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
+        url: 'https://developer.nps.gov/api/v1/parks?q=Yellowstone&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
+        //url: 'https://developer.nps.gov/api/v1/visitorcenters?q=Yellowstone&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
         type: 'GET',
         dataType: 'json',
         success: (data) => {
           //console.log('aja actually worked');
           console.log('you actually received some data', data);
-          //console.table(data.data);
-          console.log(data.data[0].title);
-          $('#des').html(data.data[0].title);
+          console.table(data.data);
+          //console.log(data.data[0].url);
+          //$('#des').html(data.data[0].title);
           /*for (const e of Object.keys(data)) {
             console.log(e, '->', data.data[e]);
           }*/
-
+          /*
           Object.keys(data.data).forEach((e) => {
             console.log('Title: ->', data.data[e].title);
-          });
+          });*/
         }
       });
     });
@@ -117,17 +141,24 @@
 
 	<div class="content">
 		<div class="current-trip"> <!-- Current Trip -->
-			<h2>Current Trip: <span id="current-trip-name">Yellowstone</span><h2>
+			<h2>Current Trip: <span id="current-trip-name"></span><h2>
 
 			<div> <!-- Location overview -->
-				<h4>Location overview: <h4>
-				<ul class="loc-info">
-					<li>Description: </li>
-						<ul ><li id="des">Wyoming, 3,471 mi^2</li></ul>
-					<li>Hours of Operation: </li>
+				<h4>Location overview: </h4>
+				<ul >
+          <li class="loc-info">State(s): </li>
+            <p class="p_text" id="states"></p>
+					<li class="loc-info">Description: </li>
+						<p class="p_text" id="des"></p>
+          <li class="loc-info">Weather: </li>
+  					<p class="p_text" id="weather"></p>
+
+
+<!--
+        	<li>Hours of Operation: </li>
 						<ul><li id="hours">7AM-11PM</li></ul>
 					<li>Contact Information: </li>
-						<ul><li id="contact">(307) 344-7381</li></ul>
+						<ul><li id="contact">(307) 344-7381</li></ul> -->
 				</ul>
 			</div>
 
@@ -147,13 +178,13 @@
 		</div>
 
 	<hr>
-
-		<div> <!-- Other Trips -->
+<!-- Other Trips
+		<div>
 			<h2>Other Trips: </h2>
 			<div>
         <a href="#top"><button class="tripButtons" id="Zion">Zion</button></a>
         <a href="#top"><button class="tripButtons" id="Yellowstone">Yellowstone</button></a>
-
+-->
         <!-- I needed to make buttons we can fix the shape
         <a href"yosemite.html" class="othertrip">Yosemite</a>
 				<a href"zion.html" class="othertrip">Zion</a>
@@ -161,9 +192,9 @@
         -->
 
         <!-- new trip input -->
-        <br/> <br/> <h2> Add New Trip </h2>
-        Location: <input id="locationBox" type="text" size="20"/>
-        <button id="addLocation">Add to Trips</button>
+        <br/> <br/> <h2> Search other locations </h2>
+        <input id="locationBox" type="text" size="20"/>
+        <button id="addLocation">Search</button>
 
 			</div>
 		</div>
