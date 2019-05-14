@@ -43,30 +43,57 @@
         $('#states').html(data.data[1].states);
         $('#des').html(data.data[1].description);
         $('#weather').html(data.data[1].weatherInfo);
-        //console.log(data.data[0].url);
-
-        /*for (const e of Object.keys(data)) {
-          console.log(e, '->', data.data[e]);
-        }*/
-        /*
-        Object.keys(data.data).forEach((e) => {
-          console.log('Title: ->', data.data[e].title);
-        });*/
       }
     });
 
-    $('#Zion').click(() => {
-      console.log("clicked");
+    // NPS data retrieval for search inquiry
+    $('#addLocation').click(() => {
+      console.log("Clicked on search");
+      // get search value and its URL request
+      const requestURL = 'https://developer.nps.gov/api/v1/parks?q=' +
+                        $('#locationBox').val() +
+                        '&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+
+      // ajax call to server for request URL
       $.ajax({
-        url: 'https://developer.nps.gov/api/v1/parks?q=Yellowstone&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
-        //url: 'https://developer.nps.gov/api/v1/visitorcenters?q=Yellowstone&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
+        // ex URL: https://developer.nps.gov/api/v1/parks?q=Zion&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2
+        url: requestURL,
         type: 'GET',
         dataType: 'json',
         success: (data) => {
-          //console.log('aja actually worked');
-          console.log('you actually received some data', data);
+          // display data to make sure it's correct
+          console.log('You actually received some data', data);
           console.table(data.data);
-          //console.log(data.data[0].url);
+
+          // match the search results with the correct park
+          const searchVal = ($('#locationBox').val() + ' National Park').toUpperCase(); // change to upper case for comparison
+          console.log(searchVal);
+
+          let parkIndex = -1;
+          Object.keys(data.data).forEach((e) => {
+            console.log(e + ' ->', data.data[e].fullName);
+            if ((data.data[e].fullName).toUpperCase() == searchVal) {
+              console.log('The correct index is: ' + e);
+              parkIndex = e;
+              // display correct information
+              $('#current-trip-name').html(data.data[parkIndex].fullName);
+              $('#states').html(data.data[parkIndex].states);
+              $('#des').html(data.data[parkIndex].description);
+              $('#weather').html(data.data[parkIndex].weatherInfo);
+            }
+          });
+          // if park name not found
+          // display this better!!
+          if (parkIndex == -1) {
+            $('#current-trip-name').html('Not Found');
+            $('#states').html('Not Found');
+            $('#des').html('Not Found');
+            $('#weather').html('Not Found');
+          }
+
+
+
+
           //$('#des').html(data.data[0].title);
           /*for (const e of Object.keys(data)) {
             console.log(e, '->', data.data[e]);
@@ -82,7 +109,7 @@
 
 
     const database = firebase.database();
-    console.log("reached");
+    //console.log("reached");
     database.ref('location/Yellowstone').set({description: 'Wyoming, 3,471 mi^2', hours: '7AM-11PM', contact: '(307) 344-7381'});
     database.ref('location/Zion').set({description: 'Utah, 229 mi^2', hours: '6AM-11PM', contact: '(435) 772-3256'});
 
