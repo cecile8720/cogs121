@@ -12,21 +12,21 @@
 
 <body>
 	<div>
-    <!-- HEADER --> 
+    <!-- HEADER -->
 		<div class="header">
 			<img id="hamburger" class="icon header" src="img/hamburger-menu.png">
 			<h2 id="current-location">Current Location</h2>
 			<img id="location-icon" class="icon" src="img/location-icon.png">
 			<a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a>
 		</div>
-		
-    <!-- MENU TABS -->
-		<div class="menu">
-			<a href="index.html" class="button">My Trips</a>
-			<a href="" class="disabled">Map</a>
-			<a href="trail-list.html" class="button">Trails</a>
-			<a href="photos.html" class="button">Photos</a>
-		</div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+      <a href="index.html" class="active"><img src="https://img.icons8.com/ios/40/000000/home-page.png"></a>
+      <a href="map.html"><img src="https://img.icons8.com/wired/40/000000/map.png"></a>
+      <a href="trail-list.html"><img src="https://img.icons8.com/ios/40/000000/earth-element.png"></a>
+      <a href="photos.html"><img src="https://img.icons8.com/ios/40/000000/image.png"></a>
+    </div>
 	</div>
 
 	<div id="googleMap" style="width:100%;height:300px"></div>
@@ -47,8 +47,8 @@
     }
   </script>
   <!-- When user clicks location icon -->
-  <script> 
-    $('#location-icon').click(function() { // Geolocation 
+  <script>
+    $('#location-icon').click(function() { // Geolocation
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
           console.log(position.coords);
@@ -121,6 +121,3 @@
 </body>
 
 </html>
-
-
-
