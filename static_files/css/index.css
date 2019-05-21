@@ -1,3 +1,4 @@
+/* Very top header */
 .header {
 	width: 100%;
 	border: 1px solid black;
@@ -6,9 +7,33 @@
 	position: relative;
 }
 
-#states {
-
+.navbar {
+	overflow: hidden;
+	background-color: #40ae93;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 0;
+	right: 0;
+	height: 70px;
 }
+
+.navbar a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 20px 16px;
+	text-decoration: none;
+	font-size: 20px;
+	width: 17.1%;
+}
+
+.navbar a.active {
+  background-color: #e1f4ef;
+  color: #40ae93;
+}
+
 
 .tripButtons {
 		background-color: green;

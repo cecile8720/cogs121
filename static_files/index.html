@@ -4,7 +4,7 @@
 <head>
   <title>My Trips</title>
 
-  <!-- Firebase initialization pls dont touch -->
+  <!-- Firebase initialization -->
   <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -20,14 +20,13 @@
   </script>
 
 
-
-
+  <!-- references and links -->
   <link rel="stylesheet" type="text/css" href="css/index.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- database callings and functions -->
   <script type="text/javascript">
-  // jQuery convention for running when the document has been fully loaded:
   $(document).ready(() => {
 
     // NPS data retrieval for Yellowstone
@@ -70,6 +69,7 @@
           console.log(searchVal);
 
           let parkIndex = -1;
+          // for loop to go through the data
           Object.keys(data.data).forEach((e) => {
             console.log(e + ' ->', data.data[e].fullName);
             if ((data.data[e].fullName).toUpperCase() == searchVal) {
@@ -90,55 +90,16 @@
             $('#des').html('Not Found');
             $('#weather').html('Not Found');
           }
-
-
-
-
-          //$('#des').html(data.data[0].title);
-          /*for (const e of Object.keys(data)) {
-            console.log(e, '->', data.data[e]);
-          }*/
-          /*
-          Object.keys(data.data).forEach((e) => {
-            console.log('Title: ->', data.data[e].title);
-          });*/
         }
       });
     });
 
 
-
+    // firebase code
     const database = firebase.database();
     //console.log("reached");
     database.ref('location/Yellowstone').set({description: 'Wyoming, 3,471 mi^2', hours: '7AM-11PM', contact: '(307) 344-7381'});
     database.ref('location/Zion').set({description: 'Utah, 229 mi^2', hours: '6AM-11PM', contact: '(435) 772-3256'});
-
-    /*
-    $('#Zion').click(() => {
-      const key = 'location/' + $('#Zion').text();
-      database.ref(key).once('value', (snapshot) => {
-        const data = snapshot.val();
-        console.log('data retrieved', data);
-        $('#current-trip-name').html($('#Zion').text());
-        $('#des').html(data.description);
-        $('#hours').html(data.hours);
-        $('#contact').html(data.contact);
-
-      })
-    });*/
-
-    $('#Yellowstone').click(() => {
-      const key = 'location/' + $('#Yellowstone').text();
-      database.ref(key).once('value', (snapshot) => {
-        const data = snapshot.val();
-        console.log('data retrieved', data);
-        $('#current-trip-name').html($('#Yellowstone').text());
-        $('#des').html(data.description);
-        $('#hours').html(data.hours);
-        $('#contact').html(data.contact);
-
-      })
-    });
 
   });
   </script>
@@ -149,19 +110,20 @@
 <body>
   <a name="top"></a>
 	<div>
+    <!-- Hamburger menu -->
 		<div class="header">
 			<img id="hamburger" class="icon header" src="img/hamburger-menu.png">
 			<h2 class="current-location">Current Location</h2>
 			<img class="icon" src="img/location-icon.png">
 			<a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a>
 		</div>
-
-		<div class="menu">
-			<a href="" class="disabled">My Trips</a>
-			<a href="map.html" class="button">Map</a>
-			<a href="trail-list.html" class="button">Trails</a>
-			<a href="photos.html" class="button">Photos</a>
-		</div>
+    <!-- Navbar -->
+    <div class="navbar">
+      <a href="index.html" class="active"><img src="https://img.icons8.com/ios/40/000000/home-page.png"></a>
+      <a href="map.html"><img src="https://img.icons8.com/wired/40/000000/map.png"></a>
+      <a href="trail-list.html"><img src="https://img.icons8.com/ios/40/000000/earth-element.png"></a>
+      <a href="photos.html"><img src="https://img.icons8.com/ios/40/000000/image.png"></a>
+    </div>
 	</div>
 
 	<hr>
@@ -190,7 +152,7 @@
 			</div>
 
 			<div> <!-- Trails Saved -->
-				<h4>Trails Saved: </h4>
+				<h4>Saved Trails: </h4>
         <!-- <a href="trail1.html"><div class="saved-trail"> -->
 				<a href="saved-trail.html"><div class="saved-trail">
 					<img src="https://placekitten.com/330/150">
@@ -205,20 +167,8 @@
 		</div>
 
 	<hr>
-<!-- Other Trips
-		<div>
-			<h2>Other Trips: </h2>
-			<div>
-        <a href="#top"><button class="tripButtons" id="Zion">Zion</button></a>
-        <a href="#top"><button class="tripButtons" id="Yellowstone">Yellowstone</button></a>
--->
-        <!-- I needed to make buttons we can fix the shape
-        <a href"yosemite.html" class="othertrip">Yosemite</a>
-				<a href"zion.html" class="othertrip">Zion</a>
-				<a href"sequoia.html" class="othertrip">Sequoia</a>
-        -->
 
-        <!-- new trip input -->
+        <!-- Search other locations  -->
         <br/> <br/> <h2> Search other locations </h2>
         <input id="locationBox" type="text" size="20"/>
         <button id="addLocation">Search</button>
