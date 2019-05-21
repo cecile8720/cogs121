@@ -4,7 +4,7 @@
 <head>
   <title>Nature Finder</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="css/nature-finder.css">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 		</div>
 
 		<div class="menu">
-			<a href="" class="disabled">My Trips</a>
+			<a href="index.html" class="button">My Trips</a>
 			<a href="map.html" class="button">Map</a>
 			<a href="trail-list.html" class="button">Trails</a>
 			<a href="photos.html" class="button">Photos</a>
@@ -27,14 +27,29 @@
 
 	<hr>
 
-	
+	<!--calling the api link directly, may not work-->
 	<script src="https://api.everypixel.com/v1/keywords"></script>
+	<!--calling the python file?-->
+	<div><span id= "naturefinder"><a href="nature-finder.py"></a></div>
+	<!--example code, replace variables. To trigger the ajax when the link is clicked-->
+	<a href="javascript:keyword"('{{ post.language }}', '{{ g.locale }}', '#post{{ post.id }}', '#translation{{ post.id }}', '#loading{{ post.id }}');"></a>
 	<script>
-		//initialize everypixel
-		var config = {
-			client_id = '<OWW16mQtRuHeIKf6X0SSDatK>',
-			client_secret = '<d7AMBj94Jj3VZSWNpuIgd6vsr4lDqqSwwoTSLPYVNrxmuVWN>',
-			params = {'url': 'http://image.everypixel.com/2014.12/67439828186edc79b9be81a4dedea8b03c09a12825b_b.jpg', 'num_keywords': 10}
+		function keyword(sourceImg, naturefinder, sourceId, destId, loadingId) {
+			$(destId).hide();
+			//$(loadingId).show();
+			$.post('/keyword', {
+				text: $(sourceId).text(),
+				sourceImg: sourceImg,
+				naturefinder: naturefinder
+			}).done(function(keyworded) {
+				$(destId).text(translated['text'])
+				$(loadingId).hide();
+				$(destId).show();
+			}).fail(function() {
+				$(destId).text("{{ _('Error: Could not contact server.') }}");
+				$(loadingId).hide();
+				$(destId).show();
+			});
 		}
 	</script>
 	<!--jQuery convention for running when the document has been fully loaded-->
@@ -43,15 +58,16 @@
 			const imgURL = ''
 
 			$('#insertImage').click(() => {
-
+				//coding the interaction, should read url and change the image
 				$.ajax({
-					url:'https://api.everypixel.com/v1/keywords',
+					url:'nature-finder.py',
 					type: 'GET',
 					dataType: 'json',
 					success: (data) => {
 					console.log('Accepting image'),
 					imgURL = document.querySelector('').src,
 					$('#theirImage').html(imgURL)
+
 					}
 				});
 			})
@@ -61,12 +77,23 @@
 		</script>
 
 
-	<div class="Image_Bin">
-		<img class="theirImage" src="img/blank.png" alt>
+	<div style="width: 500px; height: 500px; border: 1px solid #000;" class="Image_Bin">
+	<!--p>Upload your image</p-->
 	</div>
-	<div class="insertImage">
+	<label class="button" for="fileUpload">
+		<i class="fi-upload"></i>
 		<input type="file" accept="image/*">
-	</div>
+		
+		"Upload Image"
+	</label>
+	<script>
+		function display(sw) {
+			var pic;
+			if (sw == 1){
+
+			}
+		}
+	</script>
 	<div class="keyWords"></div>
 
 	<br>
