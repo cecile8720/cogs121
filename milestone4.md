@@ -8,13 +8,13 @@ Cecile Pham, Jonathan Wong, Youngmin Kim
 
 ## Updated UI
 
-Since the last milestone, we cleaned up the header to make it look cleaner. The side menu button now works, bringing out a menu from the left side when clicked. The tabs that are used to navigate to different features of the app are now located at the bottom. We changed the  colors, and replaced the old text with icons. On the home page, users can now see pictures of wherever the current trip is set to. If they slide to the left, they can see all of the pictures. This same feature can be seen in the saved trails, which is also on the home screen, below the current trip information. The maps page has been updated with the google maps api. 
+Since the last milestone, we cleaned up the header to make it look cleaner. The side menu button now works, bringing out a menu from the left side when clicked. The tabs that are used to navigate to different features of the app are now located at the bottom. We changed the  colors and replaced the old text with icons. On the home page, users can now see pictures of wherever the current trip is set to. If they slide to the left, they can see all of the pictures. This same feature can be seen in the saved trails, which is also on the home screen, below the current trip information. The maps page has been updated with the google maps api. 
 
 ## Non-trivial Actions to do
 
 1) Search up a national park you are interested in traveling to.
 
-2) 
+2) Use the map to find the national park you are interested in traveling to.
 
 ##Pictures of the UI
 
