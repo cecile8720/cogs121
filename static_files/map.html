@@ -11,10 +11,20 @@
 </head>
 
 <body>
+
+  <!-- SIDEBAR-->
+  <div id="sideMenu" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Log Out</a>
+  </div>
+
 	<div>
     <!-- HEADER -->
 		<div class="header">
-			<div class="button button-left menu"><img id="hamburger" class="icon header" src="img/hamburger-menu.png"></div>
+			<div class="button button-left menu"><span onclick="openNav()"><img id="hamburger" class="icon header" src="img/hamburger-menu.png"></span></div>
 			<div class="title">
         <div id="current-location">Current Location</div>
       </div>
@@ -69,18 +79,6 @@
 
   <!-- Google Map -->
   <script>
-    /*
-    function myMap() {
-      var mapProp= {
-        //center:new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-        center:new google.maps.LatLng(37.865101, -119.538330),
-        zoom:10,
-        mapTypeId: google.maps.MapTypeId.HYBRID
-      };
-      var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
-    */
-
     var map, infoWindow;
     function initMap() {
       map = new google.maps.Map(document.getElementById('googleMap'), {
@@ -117,6 +115,17 @@
                 'Error: The Geolocation service failed.' :
                 'Error: Your browser doesn\'t support geolocation.');
       infoWindow.open(map);
+    }
+  </script>
+  
+  <!-- Side Menu JS -->
+  <script>
+    function openNav() {
+      document.getElementById("sideMenu").style.width = "45%";
+    }
+
+    function closeNav() {
+      document.getElementById("sideMenu").style.width = "0";
     }
   </script>
 
