@@ -1,138 +1,231 @@
-/* Very top header */
-.header {
-	width: 100%;
-	border: 1px solid black;
-	text-align: center;
-	margin-bottom: 10px;
-	position: relative;
+/* Side Menu */
+.sidenav {
+    margin-top: 48px;
+    height: 90%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  
+  /* Pages */
+  .page {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 44px;
+    display: none;
+    padding: 10px;
+    background-color: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .page.current {
+    display: block;
+  }
+  
+  
+  /* Header CSS */
+  .header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      color: #66;
+      background-color: #ddd;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      z-index: 1;
+  }
+  
+  .header .title {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      text-align: center;
+      font-size: 150%;
+      margin: 8px;
+      font-weight: bold;
+  }
+  
+  .header .button {
+      width: 48px;
+      height: 48px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+  }
+  
+  .button-left {
+      left: 0;
+      border-right: 1px solid #ccc;
+  }
+  
+  .button-right {
+      right: 0;
+      border-left: 1px solid #ccc;
+  }
+  
+  img.icon {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      vertical-align: center;
+  }
+  
+  /* Navbar */
+  .navbar {
+      overflow: hidden;
+      background-color: #40ae93;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 0;
+      right: 0;
+      height: 70px;
+  }
+  
+  .navbar a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 20px 16px;
+      text-decoration: none;
+      font-size: 20px;
+      width: 17.1%;
+  }
+  
+  .navbar a.active {
+    background-color: #e1f4ef;
+    color: #40ae93;
+  }
+  
+  .tripButtons {
+          background-color: green;
+          border: 1px solid black;
+          color: white;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 23px;
+          width: 27%;
+          height: 100px;
+          padding: 30px 0px;
+          border-radius: 500%;
+  }
+  
+  #current-location {
+      display: inline-block;
+      font-size: 30px;
+  }
+  
+  .menu {
+      text-align: center;
+  }
+  
+  hr {
+      width: 100%;
+  }
+  
+  .tab {
+      float: center;
+      border: 2px solid black;
+      width: 24%;
+      height: 60px;
+      font-size: 20px;
+      background-color: #008CBA;
+      color: white;
+  }
+  
+  .disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background-color: #808080;
+      border: 1px solid black;
+      color: black;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 23px;
+      width: 24%;
+      height: 30px;
+      padding: 30px 0px;
+      margin-right: -1px;
+      margin-left: -1px;
+  }
+  
+  /*
+  .button {
+      background-color: #008CBA;
+      border: 1px solid black;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 23px;
+      width: 24%;
+      height: 30px;
+      padding: 30px 0px;
+      margin-right: -1px;
+      margin-left: -1px;
+  } 
+  */
+  
+
+  .loc-info {
+      font-size: 20px;
+  }
+  
+
+.Image_Bin {
+    float: center;
+    /*display: inline-block;*/
 }
 
-.navbar {
-	overflow: hidden;
-	background-color: #40ae93;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	padding: 0;
-	right: 0;
-	height: 70px;
+/*.file_button_container,
+.file_button_container input {
+    height: 100px;
+    width: 100px;
+    opacity: 0;
+
 }
 
-.navbar a {
-	float: left;
-	display: block;
-	color: #f2f2f2;
-	text-align: center;
-	padding: 20px 16px;
-	text-decoration: none;
-	font-size: 20px;
-	width: 17.1%;
-}
-
-.navbar a.active {
-  background-color: #e1f4ef;
-  color: #40ae93;
-}
-
-
-.tripButtons {
-		background-color: green;
-		border: 1px solid black;
-		color: white;
-		text-align: center;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 23px;
-		width: 27%;
-		height: 100px;
-		padding: 30px 0px;
-		border-radius: 500%;
-}
-img.icon {
-	width: 40px;
-	height: 40px;
-	display: inline-block;
-	vertical-align: center;
-}
-
-h2.current-location {
-	display: inline-block;
-	font-size: 30px;
-}
-
-.menu {
-	text-align: center;
-}
-
-hr {
-	width: 100%;
-}
-
-.tab {
-	float: center;
-	border: 2px solid black;
-	width: 24%;
-	height: 60px;
-	font-size: 20px;
-	background-color: #008CBA;
-	color: white;
-}
-
-.disabled {
-	opacity: 0.6;
-	cursor: not-allowed;
-	background-color: #808080;
-	border: 1px solid black;
-	color: black;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 23px;
-	width: 24%;
-	height: 30px;
-	padding: 30px 0px;
-	margin-right: -1px;
-	margin-left: -1px;
-}
-
-.button {
-	background-color: #008CBA;
-	border: 1px solid black;
-	color: white;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 23px;
-	width: 24%;
-	height: 30px;
-	padding: 30px 0px;
-	margin-right: -1px;
-	margin-left: -1px;
-}
-
-
-.loc-info {
-	font-size: 25px;
-	text-decoration: underline;
-}
-
-.p_text {
-	font-size: 20px;
-}
-
-#locationBox {
-	width: 80%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-}
-
-#addLocation {
-	height: 40px;
-}
-
-
-.imagebin {
-    /*float: center;*/
-    display: inline-block;
-}
+.file_button_container {
+    background: url(/static_files/img/upload-button.png)
+}*/
