@@ -14,23 +14,28 @@
 	<div>
     <!-- HEADER -->
 		<div class="header">
-			<img id="hamburger" class="icon header" src="img/hamburger-menu.png">
-			<h2 id="current-location">Current Location</h2>
-			<img id="location-icon" class="icon" src="img/location-icon.png">
-			<a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a>
+			<div class="button button-left menu"><img id="hamburger" class="icon header" src="img/hamburger-menu.png"></div>
+			<div class="title">
+        <div id="current-location">Current Location</div>
+      </div>
+			<div class="button button-right"><a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a></div>
 		</div>
 
-    <!-- Navbar -->
+    <!-- PAGE CONTENT -->
+    <div class="page current">
+      <div id="googleMap" style="width:100%;height:300px"></div>
+      <div id="wrapper"><button id="newMap">Update Map</button></div>
+    </div>
+
+    <!-- NAVBAR -->
     <div class="navbar">
       <a href="index.html"><img src="https://img.icons8.com/ios/40/000000/home-page.png"></a>
       <a href="map.html" class="active"><img src="https://img.icons8.com/wired/40/000000/map.png"></a>
       <a href="trail-list.html"><img src="https://img.icons8.com/ios/40/000000/earth-element.png"></a>
       <a href="photos.html"><img src="https://img.icons8.com/ios/40/000000/image.png"></a>
     </div>
-	</div>
 
-	<div id="googleMap" style="width:100%;height:300px"></div>
-  <div id="wrapper"><button id="newMap">Update Map</button></div>
+	</div>
 
   <!-- Geolocation -->
   <!-- When user opens page -->
