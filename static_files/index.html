@@ -45,6 +45,34 @@
       }
     });
 
+    $.ajax({
+      // ex URL: "https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2"
+      url: 'https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        //console.log('URL thats sending: ', imgURL);
+
+        // change this to for loop?
+        $('#img1').attr("src", data.data[0].images[0].url);
+        $('#img2').attr("src", data.data[0].images[1].url);
+        $('#img3').attr("src", data.data[0].images[2].url);
+        $('#img4').attr("src", data.data[0].images[3].url);
+        $('#img5').attr("src", data.data[0].images[4].url);
+      }
+    });
+
+    $.ajax({
+      url: 'https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=entranceFees&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
+      type: 'GET',
+      dataType: 'json',
+      success: (data) => {
+        console.log('Entrance fees were received!');
+        $('#fee').html('Cost: $' + data.data[0].entranceFees[0].cost +
+                       '. ' + data.data[0].entranceFees[0].description);
+      }
+    })
+
     // NPS data retrieval for search inquiry
     $('#addLocation').click(() => {
       console.log("Clicked on search");
@@ -52,8 +80,9 @@
       const requestURL = 'https://developer.nps.gov/api/v1/parks?q=' +
                         $('#locationBox').val() +
                         '&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+      let parkcode = '';
 
-      // ajax call to server for request URL
+      // ajax call to server for request URL for basic descriptions
       $.ajax({
         // ex URL: https://developer.nps.gov/api/v1/parks?q=Zion&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2
         url: requestURL,
@@ -72,6 +101,7 @@
           // for loop to go through the data
           Object.keys(data.data).forEach((e) => {
             console.log(e + ' ->', data.data[e].fullName);
+            // found the correct park
             if ((data.data[e].fullName).toUpperCase() == searchVal) {
               console.log('The correct index is: ' + e);
               parkIndex = e;
@@ -80,19 +110,66 @@
               $('#states').html(data.data[parkIndex].states);
               $('#des').html(data.data[parkIndex].description);
               $('#weather').html(data.data[parkIndex].weatherInfo);
+              // get park park code
+              parkcode = data.data[parkIndex].parkCode;
+              console.log('Park code is: ', parkcode);
             }
           });
           // if park name not found
-          // display this better!!
           if (parkIndex == -1) {
             $('#current-trip-name').html('Not Found');
-            $('#states').html('Not Found');
-            $('#des').html('Not Found');
-            $('#weather').html('Not Found');
+            $('#states').html('');
+            $('#des').html('');
+            $('#weather').html('');
           }
+
+          const imgURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
+                         parkcode +
+                         '&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+          const feeURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
+                         parkcode +
+                         '&fields=entranceFees&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+          showImages(imgURL);
+          showFee(feeURL);
         }
       });
-    });
+
+      // function so that it doesn't run asynchronously
+      function showImages(url) {
+        // ajax call for images of the park
+        $.ajax({
+          // ex URL: "https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2"
+          url: url,
+          type: 'GET',
+          dataType: 'json',
+          success: (data) => {
+            //console.log('URL thats sending: ', imgURL);
+            console.log('Able to retrieve pictures! Parkcode is: ' + parkcode);
+            console.table(data.data[0].images[0].title);
+            console.log(data.data[0].images);
+            // change this to for loop?
+            $('#img1').attr("src", data.data[0].images[0].url);
+            $('#img2').attr("src", data.data[0].images[1].url);
+            $('#img3').attr("src", data.data[0].images[2].url);
+            $('#img4').attr("src", data.data[0].images[3].url);
+            $('#img5').attr("src", data.data[0].images[4].url);
+          }
+        });
+      }
+
+      function showFee(url) {
+        $.ajax({
+          url: url,
+          type: 'GET',
+          dataType: 'json',
+          success: (data) => {
+            console.log('Entrance fees were received!');
+            $('#fee').html('Cost: $' + data.data[0].entranceFees[0].cost +
+                           '. ' + data.data[0].entranceFees[0].description);
+          }
+        })
+      }
+
 
 
     // firebase code
@@ -102,12 +179,16 @@
     database.ref('location/Zion').set({description: 'Utah, 229 mi^2', hours: '6AM-11PM', contact: '(435) 772-3256'});
 
   });
-  </script>
+});
+
+</script>
 
 
 </head>
 
+
 <body>
+
   <a name="top"></a>
 	<div>
     <!-- Hamburger menu -->
@@ -118,6 +199,8 @@
 			<a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a>
 		</div>
     <!-- Navbar -->
+
+
     <div class="navbar">
       <a href="index.html" class="active"><img src="https://img.icons8.com/ios/40/000000/home-page.png"></a>
       <a href="map.html"><img src="https://img.icons8.com/wired/40/000000/map.png"></a>
@@ -130,39 +213,46 @@
 
 	<div class="content">
 		<div class="current-trip"> <!-- Current Trip -->
-			<h2>Current Trip: <span id="current-trip-name"></span><h2>
+			<h2 id="trip_header">Current Trip: </br><span id="current-trip-name"></span><h2>
+
+      <div class="slider">
+        <div class="slide"><img id="img1"></div>
+        <div class="slide"><img id="img2"></div>
+        <div class="slide"><img id="img3"></div>
+        <div class="slide"><img id="img4"></div>
+        <div class="slide"><img id="img5"></div>
+      </div>
+    </div>
 
 			<div> <!-- Location overview -->
-				<h4>Location overview: </h4>
-				<ul >
-          <li class="loc-info">State(s): </li>
-            <p class="p_text" id="states"></p>
-					<li class="loc-info">Description: </li>
-						<p class="p_text" id="des"></p>
-          <li class="loc-info">Weather: </li>
-  					<p class="p_text" id="weather"></p>
-
-
-<!--
-        	<li>Hours of Operation: </li>
-						<ul><li id="hours">7AM-11PM</li></ul>
-					<li>Contact Information: </li>
-						<ul><li id="contact">(307) 344-7381</li></ul> -->
-				</ul>
+        <p class="loc-info">Description </br></p>
+					<p class="p_text" id="des"></p>
+        <p class="loc-info">Entrance Fee</br></p>
+          <p class="p_text" id="fee"></p>
+        <p class="loc-info">Weather </br></p>
+  				<p class="p_text" id="weather"></p>
 			</div>
 
 			<div> <!-- Trails Saved -->
-				<h4>Saved Trails: </h4>
-        <!-- <a href="trail1.html"><div class="saved-trail"> -->
+				<p class="loc-info">Saved Trails</br></p>
+
+        <div class="slider2">
+          <div class="slide"><img id="img1" src="https://placekitten.com/330/150">Trail 1</div>
+          <div class="slide"><img id="img2" src="https://placekitten.com/330/150">Trail 2</div>
+          <div class="slide"><img id="img3"></div>
+          <div class="slide"><img id="img4"></div>
+          <div class="slide"><img id="img5"></div>
+        </div>
+        <!--
 				<a href="saved-trail.html"><div class="saved-trail">
 					<img src="https://placekitten.com/330/150">
 					<div>Saved Trail #1</div>
 				</div></a>
-        <!-- <a href="trail2.html"<div class="saved-trail"> -->
+
 				<a href="saved-trail.html"><div class="saved-trail">
 					<img src="https://placekitten.com/330/150">
 					<div>Saved Trail #2</div>
-				</div></a>
+				</div></a> -->
 			</div>
 		</div>
 
@@ -173,10 +263,12 @@
         <input id="locationBox" type="text" size="20"/>
         <button id="addLocation">Search</button>
 
-			</div>
-		</div>
-
 	</div>
+
+  <!-- Make sure this is at the bottom always:
+       Allows space between last thing on the page and navbar -->
+  <div class="clear"></div>
+
 </body>
 
 </html>
