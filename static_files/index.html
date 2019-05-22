@@ -190,28 +190,30 @@
 <body>
 
   <a name="top"></a>
+
+  <!-- SIDEBAR-->
+  <div id="sideMenu" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Log Out</a>
+  </div>  
+
 	<div>
-    <!-- Hamburger menu -->
-		<div class="header">
-			<img id="hamburger" class="icon header" src="img/hamburger-menu.png">
-			<h2 class="current-location">Current Location</h2>
-			<img class="icon" src="img/location-icon.png">
-			<a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a>
-		</div>
-    <!-- Navbar -->
-
-
-    <div class="navbar">
-      <a href="index.html" class="active"><img src="https://img.icons8.com/ios/40/000000/home-page.png"></a>
-      <a href="map.html"><img src="https://img.icons8.com/wired/40/000000/map.png"></a>
-      <a href="trail-list.html"><img src="https://img.icons8.com/ios/40/000000/earth-element.png"></a>
-      <a href="photos.html"><img src="https://img.icons8.com/ios/40/000000/image.png"></a>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="button button-left menu"><span onclick="openNav()"><img id="hamburger" class="icon header" src="img/hamburger-menu.png"></span></div>
+      <div class="title">
+        <div id="current-location">Current Location</div>
+      </div>
+      <div class="button button-right"><a href="nature-finder.html"><img id="leaf-icon" class="icon header" src="img/leaf-icon.png"></a></div>
     </div>
 	</div>
 
 	<hr>
 
-	<div class="content">
+	<div class="page current content">
 		<div class="current-trip"> <!-- Current Trip -->
 			<h2 id="trip_header">Current Trip: </br><span id="current-trip-name"></span><h2>
 
@@ -224,25 +226,25 @@
       </div>
     </div>
 
-			<div> <!-- Location overview -->
-        <p class="loc-info">Description </br></p>
-					<p class="p_text" id="des"></p>
-        <p class="loc-info">Entrance Fee</br></p>
-          <p class="p_text" id="fee"></p>
-        <p class="loc-info">Weather </br></p>
-  				<p class="p_text" id="weather"></p>
-			</div>
+		<div> <!-- Location overview -->
+      <p class="loc-info">Description </br></p>
+				<p class="p_text" id="des"></p>
+      <p class="loc-info">Entrance Fee</br></p>
+        <p class="p_text" id="fee"></p>
+      <p class="loc-info">Weather </br></p>
+  			<p class="p_text" id="weather"></p>
+		</div>
 
-			<div> <!-- Trails Saved -->
-				<p class="loc-info">Saved Trails</br></p>
+		<div> <!-- Trails Saved -->
+			<p class="loc-info">Saved Trails</br></p>
 
-        <div class="slider2">
-          <div class="slide"><img id="img1" src="https://placekitten.com/330/150">Trail 1</div>
-          <div class="slide"><img id="img2" src="https://placekitten.com/330/150">Trail 2</div>
-          <div class="slide"><img id="img3"></div>
-          <div class="slide"><img id="img4"></div>
-          <div class="slide"><img id="img5"></div>
-        </div>
+      <div class="slider2">
+        <div class="slide"><img id="img1" src="https://placekitten.com/330/150">Trail 1</div>
+        <div class="slide"><img id="img2" src="https://placekitten.com/330/150">Trail 2</div>
+        <div class="slide"><img id="img3"></div>
+        <div class="slide"><img id="img4"></div>
+        <div class="slide"><img id="img5"></div>
+      </div>
         <!--
 				<a href="saved-trail.html"><div class="saved-trail">
 					<img src="https://placekitten.com/330/150">
@@ -253,21 +255,38 @@
 					<img src="https://placekitten.com/330/150">
 					<div>Saved Trail #2</div>
 				</div></a> -->
-			</div>
 		</div>
 
 	<hr>
-
         <!-- Search other locations  -->
         <br/> <br/> <h2> Search other locations </h2>
         <input id="locationBox" type="text" size="20"/>
         <button id="addLocation">Search</button>
 
-	</div>
-
   <!-- Make sure this is at the bottom always:
        Allows space between last thing on the page and navbar -->
   <div class="clear"></div>
+
+  </div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="index.html" class="active"><img src="https://img.icons8.com/ios/40/000000/home-page.png"></a>
+    <a href="map.html"><img src="https://img.icons8.com/wired/40/000000/map.png"></a>
+    <a href="trail-list.html"><img src="https://img.icons8.com/ios/40/000000/earth-element.png"></a>
+    <a href="photos.html"><img src="https://img.icons8.com/ios/40/000000/image.png"></a>
+  </div>
+
+    <!-- Side Menu JS -->
+  <script>
+    function openNav() {
+      document.getElementById("sideMenu").style.width = "45%";
+    }
+
+    function closeNav() {
+      document.getElementById("sideMenu").style.width = "0";
+    }
+  </script>
 
 </body>
 
