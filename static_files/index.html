@@ -4,7 +4,7 @@
 <head>
   <title>My Trips</title>
 
-  <!-- Firebase initialization -->
+  <!-- Firebase  -->
   <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -25,53 +25,118 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
   <!-- database callings and functions -->
   <script type="text/javascript">
   $(document).ready(() => {
 
-    // NPS data retrieval for Yellowstone
-    $.ajax({
-      url: 'https://developer.nps.gov/api/v1/parks?q=Yellowstone&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        console.log('you actually received some data', data);
-        console.table(data.data);
-        // display data on page
-        $('#current-trip-name').html(data.data[1].fullName);
-        $('#states').html(data.data[1].states);
-        $('#des').html(data.data[1].description);
-        $('#weather').html(data.data[1].weatherInfo);
-      }
+    // firebase code
+    const database = firebase.database();
+    console.log("firebase initiated");
+    // retrieves data from Firebase data
+    var currentTrip;
+    database.ref('currentTrip').once('value', (snapshot) => {
+      currentTrip = snapshot.val();
+      console.log("Current trip is " + currentTrip);
+      showCurrentTrip(currentTrip);
     });
 
-    $.ajax({
-      // ex URL: "https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2"
-      url: 'https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        //console.log('URL thats sending: ', imgURL);
+    // display page data based on currentTrip
+    function showCurrentTrip(trip) {
+      const requestURL = 'https://developer.nps.gov/api/v1/parks?q=' +
+                         trip +
+                         '&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+      console.log(requestURL);
+      let parkcode = '';
 
-        // change this to for loop?
-        $('#img1').attr("src", data.data[0].images[0].url);
-        $('#img2').attr("src", data.data[0].images[1].url);
-        $('#img3').attr("src", data.data[0].images[2].url);
-        $('#img4').attr("src", data.data[0].images[3].url);
-        $('#img5').attr("src", data.data[0].images[4].url);
-      }
-    });
+      // ajax call to server for request URL for basic descriptions
+      $.ajax({
+        // ex URL: https://developer.nps.gov/api/v1/parks?q=Zion&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2
+        url: requestURL,
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          // display data to make sure it's correct
+          console.log('You actually received some data', data);
+          console.table(data.data);
 
-    $.ajax({
-      url: 'https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=entranceFees&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2',
-      type: 'GET',
-      dataType: 'json',
-      success: (data) => {
-        console.log('Entrance fees were received!');
-        $('#fee').html('Cost: $' + data.data[0].entranceFees[0].cost +
-                       '. ' + data.data[0].entranceFees[0].description);
-      }
-    })
+          // match the search results with the correct park
+          const searchVal = (trip + ' National Park').toUpperCase(); // change to upper case for comparison
+          console.log(searchVal);
+
+          let parkIndex = -1;
+          // for loop to go through the data
+          Object.keys(data.data).forEach((e) => {
+            console.log(e + ' ->', data.data[e].fullName);
+            // found the correct park
+            if ((data.data[e].fullName).toUpperCase() == searchVal) {
+              console.log('The correct index is: ' + e);
+              parkIndex = e;
+              // display correct information
+              $('#current-trip-name').html(data.data[parkIndex].fullName);
+              $('#states').html(data.data[parkIndex].states);
+              $('#des').html(data.data[parkIndex].description);
+              $('#weather').html(data.data[parkIndex].weatherInfo);
+              // get park park code
+              parkcode = data.data[parkIndex].parkCode;
+              console.log('Park code is: ', parkcode);
+            }
+          });
+          // if park name not found
+          if (parkIndex == -1) {
+            $('#current-trip-name').html('Not Found');
+            $('#states').html('');
+            $('#des').html('');
+            $('#weather').html('');
+          }
+
+          const imgURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
+                         parkcode +
+                         '&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+          const feeURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
+                         parkcode +
+                         '&fields=entranceFees&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+          showImages(imgURL);
+          showFee(feeURL);
+        }
+      });
+    }
+
+    function showImages(url) {
+      // ajax call for images of the park
+      $.ajax({
+        // ex URL: "https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2"
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          //console.log('URL thats sending: ', imgURL);
+          //console.log('Able to retrieve pictures! Parkcode is: ' + code);
+          console.table(data.data[0].images[0].title);
+          console.log(data.data[0].images);
+          // change this to for loop?
+          $('#img1').attr("src", data.data[0].images[0].url);
+          $('#img2').attr("src", data.data[0].images[1].url);
+          $('#img3').attr("src", data.data[0].images[2].url);
+          $('#img4').attr("src", data.data[0].images[3].url);
+          $('#img5').attr("src", data.data[0].images[4].url);
+        }
+      });
+    }
+
+    function showFee(url) {
+      $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          console.log('Entrance fees were received!');
+          $('#fee').html('Cost: $' + data.data[0].entranceFees[0].cost +
+                         '. ' + data.data[0].entranceFees[0].description);
+        }
+      });
+    }
+
 
     // NPS data retrieval for search inquiry
     $('#addLocation').click(() => {
@@ -81,6 +146,7 @@
                         $('#locationBox').val() +
                         '&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
       let parkcode = '';
+      setTripName($('#locationBox').val());
 
       // ajax call to server for request URL for basic descriptions
       $.ajax({
@@ -170,16 +236,23 @@
         })
       }
 
-
-
-    // firebase code
-    const database = firebase.database();
-    //console.log("reached");
-    database.ref('location/Yellowstone').set({description: 'Wyoming, 3,471 mi^2', hours: '7AM-11PM', contact: '(307) 344-7381'});
-    database.ref('location/Zion').set({description: 'Utah, 229 mi^2', hours: '6AM-11PM', contact: '(435) 772-3256'});
-
   });
+
+  const tripName = ['not set yet'];
+  function setTripName(name) {
+    tripName[0] = name;
+    console.log("REACHED" + tripName[0]);
+  }
+  //console.log('TRIP NAME IS ' + tripName[0]);
+
+  $('#setTrip').click(() => {
+    console.log("CLICKEd " + tripName[0]);
+    database.ref('currentTrip').set(tripName[0]);
+  });
+
 });
+
+
 
 </script>
 
@@ -214,8 +287,17 @@
 	<hr>
 
 	<div class="page current content">
+
+    <!-- Search other locations  -->
+    </br>
+    <input id="locationBox" type="text" size="20"/>
+    <button id="addLocation">Search</button>
+
 		<div class="current-trip"> <!-- Current Trip -->
-			<h2 id="trip_header">Current Trip: </br><span id="current-trip-name"></span><h2>
+			<!-- <h2 id="trip_header">Current Trip: </br> -->
+      </br><span id="current-trip-name"></span><h2>
+      <button id="setTrip">Set as Current Trip</button>
+     </br>
 
       <div class="slider">
         <div class="slide"><img id="img1"></div>
@@ -258,10 +340,7 @@
 		</div>
 
 	<hr>
-        <!-- Search other locations  -->
-        <br/> <br/> <h2> Search other locations </h2>
-        <input id="locationBox" type="text" size="20"/>
-        <button id="addLocation">Search</button>
+
 
   <!-- Make sure this is at the bottom always:
        Allows space between last thing on the page and navbar -->
