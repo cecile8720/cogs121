@@ -87,6 +87,11 @@ img.icon {
 	vertical-align: center;
 }
 
+#current-location {
+	display: inline-block;
+	font-size: 30px;
+}
+
 /* Navbar */
 .navbar {
 	overflow: hidden;
@@ -161,4 +166,5 @@ img.icon {
 .trail-name {
 	font-size: 35px;
 }
+
 
