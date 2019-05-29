@@ -107,6 +107,11 @@
       display: inline-block;
       vertical-align: center;
   }
+
+  #current-location {
+    display: inline-block;
+    font-size: 30px;
+  }
   
   /* Navbar */
   .navbar {
@@ -150,10 +155,6 @@
           border-radius: 500%;
   }
   
-  #current-location {
-      display: inline-block;
-      font-size: 30px;
-  }
   
   .menu {
       text-align: center;
