@@ -19,7 +19,35 @@ The home screen now features the 'Set as Current Trip' button, which will allow 
 On the homescreen, information on specific national parks the user looks up are displayed in an orderly manner. Each section is titled and separated to make the display of information clear. By using the 'Set as Current Trip' button, users can leave the page or exit the app but will still be able to keep their desired national park as the default home screen. We used the National Park Services and the Firebase API to make this work. The maps page loads up geolocation first, and the currentTrip variable from firebase is preloaded into the search bar. When the user clicks the search bar they can change the map to the location of the desired national park. The user can also just search on the map directly as well. We used google maps, geolocation, and firebase apis. The nature finder will take in an image the user will upload, send it to the everypixel api, and return a list of keywords that are most relevant to the image. This involves everypixel and firebase apis.
 
 ## Thinking Beyond
+
 An ambitious data display for our app would be to have the map autoload to the currentTrip location as well as having a more detailed map wiwth highlighted routes. The trail-list page would also show possible routes based off the information it would receive from the map. 
 
-
 ## Screenshots
+
+![a1](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a1.JPG)
+
+A1: The updated home page, default
+
+![a2](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a2.JPG)
+
+A2: The updated home page after setting the new default page
+
+![a3](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a3.JPG)
+
+A3: The Maps page updated with new currentTrip
+
+![a4](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a4.JPG)
+
+A4: The data of currentTrip visualized
+
+![a5](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a5.PNG)
+
+A5: The maps page with location preloaded in
+
+![a6](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a6.PNG)
+
+A6: The maps page, using the search bar to find the national park
+
+![a7](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a7.PNG)
+
+A7: The maps page with working search function
