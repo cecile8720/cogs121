@@ -59,6 +59,8 @@
 	<!--jQuery convention for running when the document has been fully loaded-->
 	<script type="text/javascript">
 		$(document).ready(() => {
+			console.log('Ready to accept image')
+			const storageRef = firebase.storage().ref();
 			const imgURL = ''
 			$('#insertImage').click(() => {
 				//coding the interaction, should read url and change the image
@@ -68,7 +70,7 @@
 					dataType: 'json',
 					success: (data) => {
 					console.log('Accepting image'), 
-					//imgURL = document.querySelector('').src, probably not using this right
+					imgURL = document.querySelector('').src, //probably not using this right
 					$('#Image_Bin').html(imgURL)
 					}
 				});
