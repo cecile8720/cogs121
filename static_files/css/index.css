@@ -170,12 +170,17 @@ hr {
 	margin-left: -1px;
 }
 
+#setTrip {
+  margin-bottom: : 100px;
+}
+
 /* picture slider */
 .slider {
 	width: 100%;
 	height: 200px;
 	display: flex;
 	overflow-x: auto;
+  padding-top: 20px;
 }
 
 .slider2 {
