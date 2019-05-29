@@ -87,6 +87,12 @@ img.icon {
 	vertical-align: center;
 }
 
+#current-location {
+	display: inline-block;
+	font-size: 30px;
+}
+
+
 /* Pages */
 .page {
   -webkit-transform: translate3d(0, 0, 0);
