@@ -6,7 +6,7 @@
 }
 
  #wrapper {
- 	width:100%;
+ 	width: 100%;
  	text-align: center;
  }
 
@@ -15,7 +15,36 @@
  	border-radius: 25px;
  	height: 30px;
  	width: 200px;
- }
+}
+
+.form-group {
+	display: inline-block;
+	width: 100%;
+	margin-top: 10px;
+}
+
+#search_location {
+	display: inline-block;
+	border: 1px inset black;
+	height: 35px;
+	width: 75%;
+	font-size: 14px;
+}
+
+.input-group-btn {
+	display: inline-block;
+	width: 20%;
+}
+
+#locate-btn {
+	display: inline-block;
+	border: 1px solid black;
+	height: 40px;
+	width: 100%;
+	font-size: 14px;
+	background-color: #3DA78D;
+	color: white;
+}
 
  /* Side Menu */
  .sidenav {
