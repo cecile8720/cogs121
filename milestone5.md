@@ -40,14 +40,14 @@ A3: The Maps page updated with new currentTrip
 
 A4: The data of currentTrip visualized
 
-![a5](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a5.PNG)
+![a5](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a5.png)
 
 A5: The maps page with location preloaded in
 
-![a6](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a6.PNG)
+![a6](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a6.png)
 
 A6: The maps page, using the search bar to find the national park
 
-![a7](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a7.PNG)
+![a7](https://github.com/cecile8720/cogs121/blob/master/Milestone%205%20Photos/a7.png)
 
 A7: The maps page with working search function
