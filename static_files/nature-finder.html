@@ -152,8 +152,8 @@
 	<div style="width: 400px; height: 400px; border: 1px solid #000;" class="Image_Bin">
 	<!--p>Upload your image</p-->
 	</div>
-	<form method="PUT" enctype="multipart/form-data" id="insertImage">
-		<input type="file" accept="image/*">
+	<form action="/upload" method="POST" enctype="multipart/form-data" id="insertImage">
+		<input type="file" accept="image/*" name="photo">
 		<input type="submit" value="Upload" id="analyze">
 	</form>
 	<!--script>
