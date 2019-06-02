@@ -73,7 +73,7 @@
 		$(document).ready(() => {
 			console.log('Ready to accept image')
 			//create a root reference
-			const storageRef = firebase.storage().ref();
+			/*const storageRef = firebase.storage().ref();
 			//Create a reference to example image
 			const exampleRef = storageRef.child('26863598b8bec4c49bea8cf6f805002d.jpg');
 			//Create a reference to 'images/example'
@@ -84,7 +84,7 @@
 				contentType: 'image/jpeg'
 			};
 			//Upload file and metadata to the object but put isnt a valid firebase command
-			const uploadImg = storageRef.child('images/'+ file /*'26863598b8bec4c49bea8cf6f805002d.jpg'*/).put(file, metadata).then(function(snapshot){
+			const uploadImg = storageRef.child('images/'+ file /*'26863598b8bec4c49bea8cf6f805002d.jpg').put(file, metadata).then(function(snapshot){
 				console.log('Uploaded a file!');
 			});
 			//Listen for state changes, errors, and completion of the upload.
@@ -119,12 +119,12 @@
 					uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
 						console.log('File available at ', downloadURL);
 					});
-			});
+			}); */
 			$('#insertImage').click(() => {
 				//coding the interaction, should read url and change the image
 				$.ajax({
-					url:'https://firebasestorage.googleapis.com/v0/b/collegeburnouts.appspot.com/o/26863598b8bec4c49bea8cf6f805002d.jpg?alt=media&token=2f8fa8c5-78c5-48ee-a4d1-84d9f9eae4a0',
-					type: 'PUT',
+					url: reference.getDownloadURL('gs://collegeburnouts.appspot.com/'),
+					type: 'POST',
 					dataType: 'json',
 					success: (data) => {
 					console.log('Accepting image'), 
