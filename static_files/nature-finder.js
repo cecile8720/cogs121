@@ -1,6 +1,6 @@
 const express = require('express')
 const multer = require('multer')
-const upload = multer({dest:'gs://collegeburnouts.appspot.com/'})
+const upload = multer({dest:'https://firebasestorage.googleapis.com/v0/b/collegeburnouts.appspot.com/o/'})
 const app = express() 
 const request = require('request')
 

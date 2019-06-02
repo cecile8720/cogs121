@@ -72,6 +72,40 @@
 	<script type="text/javascript">
 		$(document).ready(() => {
 			console.log('Ready to accept image')
+			const storageService = firebase.storage();
+			const storageRef = storageService.ref();
+			//sign in user anonymously
+			/*firebase.auth().signInAnonymously().then(function() {
+				//once sign in completed, we get the download URL of the image
+				storageRef.getDownloadURL().then(function(url) {
+					//once we have the download URL, we set it to our img element
+					document.queryselector('img').src = url;
+				}).catch(function(error){
+					//if anything goes wrong while getting the download URL, log the error
+					console.error(error);
+			});*/
+			document.querySelector('.insertImage').addEventListener('change', handleFileUploadChange);
+			document.querySelector('.analyze').addEventListener('click', handleFileUploadSubmit);
+
+			let selectedFile;
+			function handleFileUploadChange(e) {
+				selectedFile = e.target.files[0];
+			}
+
+			function handleFileUploadSubmit(e) {
+				const uploadTask = 
+				storageRef.child('').put(selectedFile);
+
+				uploadTask.on('state_changed', (snapshot) => {
+	
+				}, (error) => {
+					console.log(error);
+				}, () => {
+					//Do something once upload is complete
+					console.log('success');
+				}
+				)
+			}
 			//create a root reference
 			/*const storageRef = firebase.storage().ref();
 			//Create a reference to example image
@@ -120,18 +154,34 @@
 						console.log('File available at ', downloadURL);
 					});
 			}); */
-			$('#insertImage').click(() => {
+			$('.insertImage').click(() => {
 				//coding the interaction, should read url and change the image
 				$.ajax({
-					url: reference.getDownloadURL('gs://collegeburnouts.appspot.com/'),
+					url: 'https://firebase.storage.googleapis.com/v0/b/collegeburnouts.appspot.com/o/',
 					type: 'POST',
 					dataType: 'json',
 					success: (data) => {
-					console.log('Accepting image'), 
-					imgURL = document.querySelector('').src, //probably not using this right
-					$('#Image_Bin').html(imgURL)
+					console.log('Accepting image') 
+					const imgURL = document.querySelector().src //probably not using this right
+					//$('.Image_Bin').html(imgURL)
 					}
 				});
+			})
+
+			$('.analyze').click(() => {
+				//bring back the keywords
+				$.ajax({
+					url: 'https://OWW16mQtRuHeIKf6X0SSDatK:d7AMBj94Jj3VZSWNpuIgd6vsr4lDqqSwwoTSLPYVNrxmuVWN@api.everypixel.com/v1/keywords?url=http://image.everypixel.com/2014.12/67439828186edc79b9be81a4dedea8b03c09a12825b_b.jpg&num_keywords=10',
+					type: 'GET',
+					dataType: 'json',
+					success: (data) => {
+						console.log('You got data' + data)
+						//display keywords using loop, might have to fix
+						for (i=0; i < 10; i++){
+						$('.key_tag').html(data)
+						}
+					}
+				})
 			})
 		});
 	</script>
@@ -152,9 +202,9 @@
 	<div style="width: 400px; height: 400px; border: 1px solid #000;" class="Image_Bin">
 	<!--p>Upload your image</p-->
 	</div>
-	<form action="/upload" method="POST" enctype="multipart/form-data" id="insertImage">
+	<form action="/upload" method="POST" enctype="multipart/form-data" class="insertImage">
 		<input type="file" accept="image/*" name="photo">
-		<input type="submit" value="Upload" id="analyze">
+		<input type="submit" value="Upload" class="analyze">
 	</form>
 	<!--script>
 		function display(sw) {
@@ -165,7 +215,38 @@
 		}
 	</script-->
 	<!--keywords should be displayed here-->
-	<div class="keyWords"></div>
+	<div class="keyWords">
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+		<li class="key">
+			<span class="key_tag"></span>
+		</li>
+	</div>
 	<!-- Make sure this is at the bottom always:
        Allows space between last thing on the page and navbar -->
 	<div class="clear"></div>
