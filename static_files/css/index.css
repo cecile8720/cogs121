@@ -178,6 +178,17 @@ hr {
 
 #setTrip {
   margin-bottom: : 100px;
+  border-radius: 15px;
+  background-color: #e1f4ef;
+  font-size: 16px;
+  height: 30px;
+}
+
+#reset {
+  border-radius: 15px;
+  background-color: #e1f4ef;
+  font-size: 16px;
+  height: 30px;
 }
 
 /* picture slider */

@@ -38,7 +38,14 @@
     database.ref('currentTrip').once('value', (snapshot) => {
       currentTrip = snapshot.val();
       console.log("Current trip is " + currentTrip);
-      showCurrentTrip(currentTrip);
+      if (currentTrip == 'none') {
+        console.log("reached reset section");
+        $('#current-trip-name').html('No current trip');
+        $('#reset_info').html('Please select a park and set as current trip to save and view its information');
+      }
+      else {
+        showCurrentTrip(currentTrip);
+      }
     });
 
     // display page data based on currentTrip
@@ -48,6 +55,7 @@
                          '&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
       console.log(requestURL);
       let parkcode = '';
+      $('#reset_info').html('');
 
       // ajax call to server for request URL for basic descriptions
       $.ajax({
@@ -74,7 +82,7 @@
               parkIndex = e;
               // display correct information
               $('#current-trip-name').html(data.data[parkIndex].fullName);
-              $('#states').html(data.data[parkIndex].states);
+              //$('#states').html(data.data[parkIndex].states);
               $('#des').html(data.data[parkIndex].description);
               $('#weather').html(data.data[parkIndex].weatherInfo);
               // get park park code
@@ -235,10 +243,10 @@
           }
         })
       }
+    });
 
-  });
 
-  const tripName = ['not set yet'];
+  const tripName = ['not set yet or idk how this would reach'];
   function setTripName(name) {
     tripName[0] = name;
     console.log("REACHED" + tripName[0]);
@@ -249,6 +257,13 @@
     console.log("CLICKEd " + tripName[0]);
     database.ref('currentTrip').set(tripName[0]);
   });
+
+  $('#reset').click(() => {
+    console.log("Clicke on reset");
+    database.ref('currentTrip').set("none");
+  });
+
+
 
 });
 
@@ -295,8 +310,10 @@
 			<!-- <h2 id="trip_header">Current Trip: </br> -->
       </br><span id="current-trip-name"></span><h2>
       <button id="setTrip">Set as Current Trip</button>
+      <button id="reset">Reset Current Trip</button>
      </br>
 
+      <p class="p_text" id="reset_info"></p>
       <div class="slider">
         <div class="slide"><img id="img1"></div>
         <div class="slide"><img id="img2"></div>
