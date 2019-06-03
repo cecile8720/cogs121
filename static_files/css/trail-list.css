@@ -113,7 +113,7 @@ img.icon {
 	padding: 20px 16px;
 	text-decoration: none;
 	font-size: 20px;
-	width: 17.1%;
+	width: 24%;
 }
 
 .navbar a.active {
@@ -164,6 +164,7 @@ img.icon {
     width: 360px;
     height: 270px;
 }
+<<<<<<< HEAD
 
 
 #setTrip {
@@ -185,3 +186,8 @@ img.icon {
 	font-weight: bold;
 	color: #50706d;
 }
+=======
+.trail-name {
+	font-size: 35px;
+}
+>>>>>>> 7f042de3f657fa237d7817022e05b33019c8c177
