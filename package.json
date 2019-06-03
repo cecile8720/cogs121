@@ -1,0 +1,22 @@
+{
+  "name": "cogs121",
+  "version": "1.0.0",
+  "description": "",
+  "main": "\u001b[D\u001b[D\u001b[D\u001b[index\u001b[C\u001b[C\u001b[D\u001b[D.js)\u001b[D\u001b[D\u001b\u001b[C\u001b\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[index.js)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cecile8720/cogs121.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cecile8720/cogs121/issues"
+  },
+  "homepage": "https://github.com/cecile8720/cogs121#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
