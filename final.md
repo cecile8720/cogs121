@@ -17,16 +17,23 @@ Youngmin: Did the write ups, and made the trail list page. Tested for bugs in th
 ## List of Source Code Files
 
 CSS- These files were used to style each of the pages of our app
+
 index.css
+
 map.css
+
 trail-list.css
 
 HTML
+
 index.html- The homepage which served to show users information on any national parks they wanted to learn more about.
+
 map.html- The feature that shows the park the users are interested in on a map.
+
 trail-list.html- Shows trails in the park the users are interested in.
 
 JavaScript
+
 server.js- Sets up the node.js + express backend.
 
 ## Final Presentation
