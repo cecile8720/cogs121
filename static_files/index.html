@@ -43,6 +43,11 @@
         console.log("Reached reset section");
         $('#current-trip-name').html('No current trip');
         $('#reset_info').html('Please select a park and set as current trip to save and view its information');
+        $('#img1').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
+        $('#img2').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
+        $('#img3').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
+        $('#img4').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
+        $('#img5').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
       }
       // if there is a current trip, show the trip's information
       else {
@@ -212,28 +217,24 @@
             $('#weather').html('');
             $('#fee').html('');
             $('#img1').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
-            $('#img2').attr();
-            $('#img3').attr();
-            $('#img4').attr();
-            $('#img5').attr();
+            $('#img2').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
+            $('#img3').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
+            $('#img4').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
+            $('#img5').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
           }
         }
       });
 
-      // function so that it doesn't run asynchronously
+   /* These functions were added so that ajax doesn't run asynchronously and
+      there's enough time to retrieve the variables needed to show images and fees */
       function showImages(url) {
-        // ajax call for images of the park
         $.ajax({
           // ex URL: "https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2"
           url: url,
           type: 'GET',
           dataType: 'json',
           success: (data) => {
-            //console.log('URL thats sending: ', imgURL);
             console.log('Able to retrieve pictures! Parkcode is: ' + parkcode);
-            console.table(data.data[0].images[0].title);
-            console.log(data.data[0].images);
-            // change this to for loop?
             $('#img1').attr("src", data.data[0].images[0].url);
             $('#img2').attr("src", data.data[0].images[1].url);
             $('#img3').attr("src", data.data[0].images[2].url);
@@ -257,34 +258,29 @@
       }
     });
 
-
-  const tripName = ['not set yet or idk how this would reach'];
+  /* Function to set current trip name to the variable tripName */
+  const tripName = ['Not yet set'];
   function setTripName(name) {
     tripName[0] = name;
   }
-  //console.log('TRIP NAME IS ' + tripName[0]);
-
+  /* When setTrip is clicked, the variable of the current trip is set in
+  Firebase so that it could be saved. */
   $('#setTrip').click(() => {
-    console.log("CLICKEd " + tripName[0]);
+    console.log("Clicked to set trip as " + tripName[0]);
     database.ref('currentTrip').set(tripName[0]);
     $('#reset_info').html('');
   });
 
+  /* Function that deletes the current trip from the Firebase database to reset */
   $('#reset').click(() => {
-    console.log("Clicke on reset");
+    console.log("Clicked on reset");
     database.ref('currentTrip').set("none");
     $('#reset_info').html('Please select a park and set as current trip to save and view its information');
   });
 
-
-
 });
 
-
-
 </script>
-
-
 </head>
 
 
@@ -318,8 +314,8 @@
     <input id="locationBox" type="text" size="20"/>
     <button id="addLocation">Search</button>
 
-		<div class="current-trip"> <!-- Current Trip -->
-			<!-- <h2 id="trip_header">Current Trip: </br> -->
+    <!-- Current Trip -->
+		<div class="current-trip">
       </br><span id="current-trip-name"></span><h2>
       <button id="setTrip">Set as Current Trip</button>
       <button id="reset">Reset Current Trip</button>
@@ -350,20 +346,7 @@
       <div class="slider2">
         <div class="slide"><img id="img1" src="img/Zion-Area-Map-Website.jpg">Trail 1</div>
         <div class="slide"><img id="img2" src="img/zion-hiking-map.jpg">Trail 2</div>
-        <div class="slide"><img id="img3"></div>
-        <div class="slide"><img id="img4"></div>
-        <div class="slide"><img id="img5"></div>
       </div>
-        <!--
-				<a href="saved-trail.html"><div class="saved-trail">
-					<img src="https://placekitten.com/330/150">
-					<div>Saved Trail #1</div>
-				</div></a>
-
-				<a href="saved-trail.html"><div class="saved-trail">
-					<img src="https://placekitten.com/330/150">
-					<div>Saved Trail #2</div>
-				</div></a> -->
 		</div>
 
 	<hr>
