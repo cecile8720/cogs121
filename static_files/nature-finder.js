@@ -1,6 +1,6 @@
 const express = require('express')
 const multer = require('multer')
-const upload = multer({dest:'gs://collegeburnouts.appspot.com/'})
+const upload = multer({dest:'https://firebasestorage.googleapis.com/v0/b/collegeburnouts.appspot.com/o/'})
 const app = express() 
 const request = require('request')
 
@@ -14,6 +14,8 @@ function (error, response, body) {
     const result = JSON.parse(body);
     console.log(result);
 });
+
+
 
 const param = {'url': 'https://firebasestorage.googleapis.com/v0/b/collegeburnouts.appspot.com/o/26863598b8bec4c49bea8cf6f805002d.jpg?alt=media&token=2f8fa8c5-78c5-48ee-a4d1-84d9f9eae4a0', 'num_keywords': 10}
 
