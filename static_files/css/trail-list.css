@@ -164,8 +164,24 @@ img.icon {
     width: 360px;
     height: 270px;
 }
-.trail-name {
-	font-size: 35px;
+
+
+#setTrip {
+  margin-bottom: : 100px;
+  border-radius: 15px;
+  background-color: #e1f4ef;
+  font-size: 16px;
+  height: 30px;
 }
 
-
+#reset {
+  border-radius: 15px;
+  background-color: #e1f4ef;
+  font-size: 16px;
+  height: 30px;
+}
+.trail-name {
+	font-size: 35px;
+	font-weight: bold;
+	color: #50706d;
+}
