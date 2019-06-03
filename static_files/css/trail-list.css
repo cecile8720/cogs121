@@ -164,18 +164,8 @@ img.icon {
     width: 360px;
     height: 270px;
 }
-<<<<<<< HEAD
 
-
-#setTrip {
-  margin-bottom: : 100px;
-  border-radius: 15px;
-  background-color: #e1f4ef;
-  font-size: 16px;
-  height: 30px;
-}
-
-#reset {
+#add {
   border-radius: 15px;
   background-color: #e1f4ef;
   font-size: 16px;
@@ -186,8 +176,3 @@ img.icon {
 	font-weight: bold;
 	color: #50706d;
 }
-=======
-.trail-name {
-	font-size: 35px;
-}
->>>>>>> 7f042de3f657fa237d7817022e05b33019c8c177

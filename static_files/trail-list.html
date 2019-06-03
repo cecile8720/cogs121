@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+	 <!-- Firebase initialization -->
+	 <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
+	 <script>
+		 // Initialize Firebase
+		 var config = {
+			 apiKey: "AIzaSyBU1zQlcACqaOhTPhsPNyQkh1RYFf2cdYU",
+			 authDomain: "collegeburnouts.firebaseapp.com",
+			 databaseURL: "https://collegeburnouts.firebaseio.com",
+			 projectId: "collegeburnouts",
+			 storageBucket: "collegeburnouts.appspot.com",
+			 messagingSenderId: "890814837618"
+		 };
+		 firebase.initializeApp(config);
+	 </script>
   <title>Trails</title>
   <link rel="stylesheet" type="text/css" href="css/trail-list.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -29,7 +42,14 @@
 
 	<hr>
 
-	  <!-- PAGE CONTENT -->
+		<!-- PAGE CONTENT -->
+		<script type="text/javascript">
+			$(document).ready(() => {
+				    // Retrieve data from Firebase
+						const database = firebase.database();
+						console.log("Firebase is initiated");
+			})
+		</script>
 	  <div data-role="page current" style="margin-top: 50px;">
 		<div class="contents">
 			<p class="trail-name">Trail 1</p>
@@ -37,17 +57,17 @@
 				<img src="img/trail-1-placeholder.jpg" git>
 			</div>
 		</br><span id="current-trip-name"></span><h2>
-				<button id="setTrip">Reviews</button>
-				<button id="reset">Add to Trip</button>
+				<button id="add">Add to Trip</button>
 			 </br>
-			<!--p class="trail-name">Trail 2</p>
+			 <hr>
+			<p class="trail-name">Trail 2</p>
 			<div class="trail-map">
-				<img src="img/trail-1-placeholder.jpg" git>
+				<img src="img/Zion-Area-Map-Website.jpg" git>
 			</div>
 		</br><span id="current-trip-name"></span><h2>
-				<button id="setTrip">Reviews</button>
 				<button id="reset">Add to Trip</button>
-			 </br-->
+			 </br>
+			 <hr>
 			 		  <!-- Make sure this is at the bottom always:
        Allows space between last thing on the page and navbar -->
 			 <div class="clear"></div>
