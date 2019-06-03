@@ -26,3 +26,4 @@ with open('image.jpg','rb') as image:
 
 # Error
     
+    curl --user "OWW16mQtRuHeIKf6X0SSDatK:d7AMBj94Jj3VZSWNpuIgd6vsr4lDqqSwwoTSLPYVNrxmuVWN" "https://api.everypixel.com/v1/keywords?url=http://image.everypixel.com/2014.12/67439828186edc79b9be81a4dedea8b03c09a12825b_b.jpg&num_keywords=10"
