@@ -4,7 +4,7 @@
 <head>
   <title>My Trips</title>
 
-  <!-- Firebase  -->
+  <!-- Firebase initialization -->
   <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -20,44 +20,49 @@
   </script>
 
 
-  <!-- references and links -->
+  <!-- References and links -->
   <link rel="stylesheet" type="text/css" href="css/index.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-  <!-- database callings and functions -->
+  <!-- Database callings and functions -->
   <script type="text/javascript">
   $(document).ready(() => {
 
-    // firebase code
+    // Retrieve data from Firebase
     const database = firebase.database();
-    console.log("firebase initiated");
-    // retrieves data from Firebase data
+    console.log("Firebase is initiated");
+    // Retrieves the current trip name variable
     var currentTrip;
     database.ref('currentTrip').once('value', (snapshot) => {
       currentTrip = snapshot.val();
       console.log("Current trip is " + currentTrip);
+      // if there are no current trips
       if (currentTrip == 'none') {
-        console.log("reached reset section");
+        console.log("Reached reset section");
         $('#current-trip-name').html('No current trip');
         $('#reset_info').html('Please select a park and set as current trip to save and view its information');
       }
+      // if there is a current trip, show the trip's information
       else {
         showCurrentTrip(currentTrip);
       }
     });
 
-    // display page data based on currentTrip
+
+ /* Function that displays the current trip's information when a page first
+    loads. The input variable is the trip name retrieved from Firebase and
+    it is used for the request URL to the National Park Database. */
     function showCurrentTrip(trip) {
       const requestURL = 'https://developer.nps.gov/api/v1/parks?q=' +
                          trip +
                          '&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
       console.log(requestURL);
-      let parkcode = '';
-      $('#reset_info').html('');
+      var parkcode = ''; // used to save the park code
+      $('#reset_info').html(''); // deletes the "Please set a park as current trip"
 
-      // ajax call to server for request URL for basic descriptions
+      // Ajax call to server for request URL for basic descriptions
       $.ajax({
         // ex URL: https://developer.nps.gov/api/v1/parks?q=Zion&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2
         url: requestURL,
@@ -70,59 +75,54 @@
 
           // match the search results with the correct park
           const searchVal = (trip + ' National Park').toUpperCase(); // change to upper case for comparison
-          console.log(searchVal);
 
-          let parkIndex = -1;
-          // for loop to go through the data
+          var parkIndex = -1; // index of park if found. -1 = not found
+          // for loop to go through the data received from database
           Object.keys(data.data).forEach((e) => {
-            console.log(e + ' ->', data.data[e].fullName);
-            // found the correct park
+            // the correct park was found
             if ((data.data[e].fullName).toUpperCase() == searchVal) {
-              console.log('The correct index is: ' + e);
               parkIndex = e;
-              // display correct information
+              // display correct information in the HTML designated spots
               $('#current-trip-name').html(data.data[parkIndex].fullName);
-              //$('#states').html(data.data[parkIndex].states);
               $('#des').html(data.data[parkIndex].description);
               $('#weather').html(data.data[parkIndex].weatherInfo);
               // get park park code
               parkcode = data.data[parkIndex].parkCode;
               console.log('Park code is: ', parkcode);
+              // use the parkcode to retrieve image and fee URLS
+              const imgURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
+                             parkcode +
+                             '&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+              const feeURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
+                             parkcode +
+                             '&fields=entranceFees&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+              showImages(imgURL);
+              showFee(feeURL);
             }
           });
-          // if park name not found
+          // if park name was not found
           if (parkIndex == -1) {
+            // set description as not found
             $('#current-trip-name').html('Not Found');
             $('#states').html('');
             $('#des').html('');
             $('#weather').html('');
+            $('#fee').html('');
           }
-
-          const imgURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
-                         parkcode +
-                         '&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
-          const feeURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
-                         parkcode +
-                         '&fields=entranceFees&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
-          showImages(imgURL);
-          showFee(feeURL);
         }
       });
     }
 
+ /* Function that displays the current trip's images from the NPS database.
+    The argument is the URL used to retrieve the image. */
     function showImages(url) {
-      // ajax call for images of the park
       $.ajax({
         // ex URL: "https://developer.nps.gov/api/v1/parks?parkCode=yell&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2"
         url: url,
         type: 'GET',
         dataType: 'json',
         success: (data) => {
-          //console.log('URL thats sending: ', imgURL);
-          //console.log('Able to retrieve pictures! Parkcode is: ' + code);
-          console.table(data.data[0].images[0].title);
-          console.log(data.data[0].images);
-          // change this to for loop?
+          // display 5 images in the designated HTML area
           $('#img1').attr("src", data.data[0].images[0].url);
           $('#img2').attr("src", data.data[0].images[1].url);
           $('#img3').attr("src", data.data[0].images[2].url);
@@ -132,6 +132,8 @@
       });
     }
 
+ /* Function that displays the current trip's fee to enter the park. The
+    argument is the URL used to retrieve the fee. */
     function showFee(url) {
       $.ajax({
         url: url,
@@ -146,15 +148,19 @@
     }
 
 
-    // NPS data retrieval for search inquiry
+/*  NPS data retrieval for SEARCH INQUIERIES. This will run when the "Search"
+    button is clicked. It will retrieve the value from the search box and fin
+    the matching park name from the NPS database. It will then populate the
+    appropriate HTML fields with the respective information. If the search
+    inquiry was not found, "Not Found" will be displayed. */
     $('#addLocation').click(() => {
       console.log("Clicked on search");
       // get search value and its URL request
       const requestURL = 'https://developer.nps.gov/api/v1/parks?q=' +
                         $('#locationBox').val() +
                         '&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
-      let parkcode = '';
-      setTripName($('#locationBox').val());
+      var parkcode = '';
+      setTripName($('#locationBox').val()); // sets the trip name to fb var
 
       // ajax call to server for request URL for basic descriptions
       $.ajax({
@@ -164,14 +170,14 @@
         dataType: 'json',
         success: (data) => {
           // display data to make sure it's correct
-          console.log('You actually received some data', data);
+          console.log('You received some data');
           console.table(data.data);
 
           // match the search results with the correct park
-          const searchVal = ($('#locationBox').val() + ' National Park').toUpperCase(); // change to upper case for comparison
-          console.log(searchVal);
+          // change to upper case for comparison
+          const searchVal = ($('#locationBox').val() + ' National Park').toUpperCase();
 
-          let parkIndex = -1;
+          var parkIndex = -1;
           // for loop to go through the data
           Object.keys(data.data).forEach((e) => {
             console.log(e + ' ->', data.data[e].fullName);
@@ -187,6 +193,15 @@
               // get park park code
               parkcode = data.data[parkIndex].parkCode;
               console.log('Park code is: ', parkcode);
+
+              const imgURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
+                              parkcode +
+                             '&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+              const feeURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
+                              parkcode +
+                             '&fields=entranceFees&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
+              showImages(imgURL);
+              showFee(feeURL);
             }
           });
           // if park name not found
@@ -195,16 +210,13 @@
             $('#states').html('');
             $('#des').html('');
             $('#weather').html('');
+            $('#fee').html('');
+            $('#img1').attr("src", "https://img.icons8.com/windows/100/000000/close-window.png");
+            $('#img2').attr();
+            $('#img3').attr();
+            $('#img4').attr();
+            $('#img5').attr();
           }
-
-          const imgURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
-                         parkcode +
-                         '&fields=images&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
-          const feeURL = 'https://developer.nps.gov/api/v1/parks?parkCode=' +
-                         parkcode +
-                         '&fields=entranceFees&api_key=pEHcIgdfn7FtEcQa1aUUfUpOEr6c58GjQYKJ2YB2';
-          showImages(imgURL);
-          showFee(feeURL);
         }
       });
 
@@ -249,18 +261,19 @@
   const tripName = ['not set yet or idk how this would reach'];
   function setTripName(name) {
     tripName[0] = name;
-    console.log("REACHED" + tripName[0]);
   }
   //console.log('TRIP NAME IS ' + tripName[0]);
 
   $('#setTrip').click(() => {
     console.log("CLICKEd " + tripName[0]);
     database.ref('currentTrip').set(tripName[0]);
+    $('#reset_info').html('');
   });
 
   $('#reset').click(() => {
     console.log("Clicke on reset");
     database.ref('currentTrip').set("none");
+    $('#reset_info').html('Please select a park and set as current trip to save and view its information');
   });
 
 
